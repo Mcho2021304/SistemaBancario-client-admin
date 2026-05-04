@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { AuthPage } from "../../features/auth/pages/AuthPage.jsx";
 import { DashboardPage } from "../layouts/DashboardPage.jsx";
-import { Fields } from "../../features/fields/components/Fields.jsx";
-import { Reservations } from "../../features/reservations/components/Reservations.jsx";
-import { Teams } from "../../features/teams/components/Teams.jsx";
+import { Deposits } from "../../features/deposits/components/Deposits.jsx";
+import { Payments } from "../../features/payments/components/Payments.jsx";
+import { Services } from "../../features/services/components/Services.jsx";
 import { Tournaments } from "../../features/tournaments/components/Tournaments.jsx";
 import { Users } from "../../features/users/components/Users.jsx";
 
@@ -15,9 +15,9 @@ export const AppRoutes = () => {
 
       {/* PROTECTED + ROLE */}
       <Route path="/dashboard/*" element={<DashboardPage />}>
-        <Route path="fields" element={<Fields />} />
-        <Route path="reservations" element={<Reservations />} />
-        <Route path="teams" element={<Teams />} />
+        <Route path="deposits" element={<Deposits />} />
+        <Route path="payments" element={<Payments />} />
+        <Route path="services" element={<Services />} />
         <Route path="tournaments" element={<Tournaments />} />
         <Route path="users" element={<Users />} />
       </Route>

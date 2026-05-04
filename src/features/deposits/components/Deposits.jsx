@@ -1,4 +1,4 @@
-export const Fields = () => {
+export const Deposits = () => {
     return (
         <div className="p-4">
     {/* HEADER */}

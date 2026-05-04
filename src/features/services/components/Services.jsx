@@ -1,7 +1,7 @@
 import { Spinner } from "../../auth/components/Spinner";
-import { TeamModal } from "./TeamModal.jsx";
+import { ServicesModal } from "./ServicesModal.jsx";
 
-export const Teams = () => {
+export const Services = () => {
     const loading = false;
 
     if (loading) return <Spinner />;

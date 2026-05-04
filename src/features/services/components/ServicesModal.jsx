@@ -1,4 +1,4 @@
-export const TeamModal = () => {
+export const ServicesModal = () => {
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
             {/* CONTENEDOR */}

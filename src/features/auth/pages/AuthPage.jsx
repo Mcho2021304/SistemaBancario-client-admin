@@ -3,42 +3,55 @@ import { LoginForm } from "../components/LoginForm";
 import { ForgotPasswordForm } from "../components/ForgotPasswordForm";
 
 const AuthPage = () => {
-    const [isForgot, setIsForgot] = useState(false) // Pantalla Olvide mi contraseña
+    const [isForgot, setIsForgot] = useState(false);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-            <div className="w-full max-w-xl bg-white rounded-xl shadow-lg border border-gray-200 p-6 md:p-10">
-                <div className="flex justify-center mb-6">
-                    <img
-                        src="/src/assets/img/bancoLogo.png"
-                        alt="Sistema Bancario"
-                        className="h-20 w-auto"
-                    />
+        /* FONDO COMPLETO: Un gradiente que elimina el blanco total */
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-green-500 via-emerald-400 to-teal-500 p-4">
+            
+            {/* Luces decorativas para dar profundidad al fondo */}
+            <div className="absolute top-0 left-0 w-full h-full">
+                <div className="absolute top-[10%] left-[10%] w-96 h-96 bg-white/20 rounded-full blur-[120px] animate-pulse"></div>
+                <div className="absolute bottom-[10%] right-[10%] w-96 h-96 bg-black/10 rounded-full blur-[120px]"></div>
+            </div>
+
+            {/* EL CUADRO: Ahora está remarcado con sombra y borde blanco sólido */}
+            <div className="relative z-10 w-full max-w-xl bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-4 border-white/50 p-8 md:p-12 transition-all">
+                
+                {/* Logo con sombra para que no se pierda */}
+                <div className="flex justify-center mb-8">
+                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                        <img
+                            src="/src/assets/img/bancoLogo.png"
+                            alt="Sistema Bancario"
+                            className="h-20 w-auto object-contain"
+                        />
+                    </div>
                 </div>
-                <div className="text-center mb-6">
-                    <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl lg:text-4xl font-black text-gray-900 mb-2">
                         {isForgot ? "Recuperar Contraseña" : "Bienvenido de Nuevo"}
                     </h1>
-                    <p className="text-gray-600 text-base max-w-md mx-auto">
+                    <p className="text-gray-600 font-medium">
                         {isForgot
-                            ? "Ingresa tu correo para recuperar tu contraseña"
-                            : "Ingresa a tu cuenta de administrador del Sistema Bancario"}
+                            ? "Ingresa tu correo para continuar"
+                            : "Administración del Sistema Bancario"}
                     </p>
                 </div>
 
-                {/* SECCIÓN DEL FORMULARIO */}
-                {isForgot ? (
-                    <ForgotPasswordForm
-                        onSwitch={() => {
-                            setIsForgot(false);
-                        }}
-                    />
-                ) : (
-                    <LoginForm onForgot={() => setIsForgot(true)} />
-                )}
+                {/* Contenedor del Formulario */}
+                <div className="bg-gray-50/50 p-2 rounded-2xl">
+                    {isForgot ? (
+                        <ForgotPasswordForm
+                            onSwitch={() => setIsForgot(false)}
+                        />
+                    ) : (
+                        <LoginForm onForgot={() => setIsForgot(true)} />
+                    )}
+                </div>
             </div>
         </div>
     );
 };
-
 export { AuthPage };

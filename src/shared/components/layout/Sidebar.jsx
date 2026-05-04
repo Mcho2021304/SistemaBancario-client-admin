@@ -5,9 +5,9 @@ export const Sidebar = () => {
  
     const items = [
         { label: "Usuarios", to: "/dashboard/users" },
-        { label: "Depositos", to: "/dashboard/fields" },
-        { label: "Pagos", to: "/dashboard/reservations" },
-        { label: "Servicios", to: "/dashboard/teams" },
+        { label: "Depositos", to: "/dashboard/deposits" },
+        { label: "Pagos", to: "/dashboard/payments" },
+        { label: "Servicios", to: "/dashboard/services" },
         
     ];
  

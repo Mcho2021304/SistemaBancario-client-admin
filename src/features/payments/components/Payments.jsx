@@ -1,6 +1,6 @@
 import { Spinner } from "../../auth/components/Spinner.jsx";
 
-export const Reservations = () => {
+export const Payments = () => {
     const loading = false;
 
     if (loading) return <Spinner />;
