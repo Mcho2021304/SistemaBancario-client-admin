@@ -12,6 +12,7 @@ export const useUsersStore = create((set, get) => ({
     error: null,
 
     getUsers: async () => {
+        if (get().loading) return;
         try {
             set({ loading: true, error: null });
             const response = await getAllUsers();
@@ -22,7 +23,6 @@ export const useUsersStore = create((set, get) => ({
                 error: error.response?.data?.message || "Error al obtener usuarios",
                 loading: false,
             });
-            throw error;
         }
     },
 
@@ -30,8 +30,8 @@ export const useUsersStore = create((set, get) => ({
         try {
             set({ loading: true, error: null });
             const response = await createUserRequest(data);
-            await get().getUsers();
             set({ loading: false });
+            await get().getUsers();
             return response.data;
         } catch (error) {
             set({
@@ -46,8 +46,8 @@ export const useUsersStore = create((set, get) => ({
         try {
             set({ loading: true, error: null });
             const response = await updateUserRequest(id, data);
-            await get().getUsers();
             set({ loading: false });
+            await get().getUsers();
             return response.data;
         } catch (error) {
             set({

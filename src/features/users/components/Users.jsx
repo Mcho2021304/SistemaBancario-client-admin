@@ -17,6 +17,7 @@ export const Users = () => {
 
     useEffect(() => {
         getUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const filtered = users.filter((u) => {
