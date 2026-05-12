@@ -1,22 +1,58 @@
-//import defaultAvatarImg from "../../../assets/img/avatarDefault-1749508519496.png";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useUsersStore } from "../store/usersStore";
+import { showSuccess, showError } from "../../../shared/utils/toast";
 
-export const UserDetailModal = ({ isOpen, userrrrr }) => {
-    //if (!isOpen || !user) return null;
+const inputClass =
+    "w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition";
 
-    //const avatarSrc = user?.profilePicture || defaultAvatarImg;
+export const UserDetailModal = ({ isOpen, user, onClose }) => {
+    const { updateUser, deactivateUser, loading } = useUsersStore();
 
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
 
-    // borrar avatarSrc,user y corrige el parámetro userrrrrr
-    const avatarSrc = "";
-    const user = {
-        id: "123456789",
-        name: "Juan",
-        surname: "Pérez",
-        username: "juanperez",
-        email: "juanperez@example.com",
-        role: "USER_ROLE", // o "ADMIN_ROLE"
-        profilePicture: "https://i.pravatar.cc/150?img=3", // puedes cambiarlo o dejar null
+    useEffect(() => {
+        if (user) {
+            reset({
+                name: user.name || "",
+                surname: user.surname || "",
+                email: user.email || "",
+                role: user.role || "Client",
+            });
+        }
+    }, [user, reset]);
+
+    const onSubmit = async (data) => {
+        try {
+            await updateUser(user._id, data);
+            showSuccess("Usuario actualizado correctamente");
+            onClose();
+        } catch (error) {
+            showError(error.response?.data?.message || "Error al actualizar usuario");
+        }
     };
+
+    const handleDeactivate = async () => {
+        const confirmed = window.confirm(
+            `¿Seguro que deseas inactivar a ${user.name} ${user.surname}? Esta acción también desactivará sus cuentas bancarias.`
+        );
+        if (!confirmed) return;
+
+        try {
+            await deactivateUser(user._id);
+            showSuccess("Usuario inactivado correctamente");
+            onClose();
+        } catch (error) {
+            showError(error.response?.data?.message || "Error al inactivar usuario");
+        }
+    };
+
+    if (!isOpen || !user) return null;
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
@@ -25,104 +61,124 @@ export const UserDetailModal = ({ isOpen, userrrrr }) => {
                 {/* HEADER */}
                 <div
                     className="p-4 sm:p-5 text-white sticky top-0 z-10"
-                    style={{
-                        background:
-                            "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
-                    }}
+                    style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
                 >
-                    <h2 className="text-xl sm:text-2xl font-bold">
-                        Detalle de Usuario
-                    </h2>
+                    <h2 className="text-xl sm:text-2xl font-bold">Editar Usuario</h2>
                     <p className="text-xs sm:text-sm opacity-80">
-                        Consulta información del usuario
+                        Modifica los datos del usuario
                     </p>
                 </div>
 
                 {/* CONTENT */}
-                <div className="p-5 space-y-4 overflow-y-auto">
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="p-5 space-y-4 overflow-y-auto"
+                >
+                    {/* INFO READONLY */}
+                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-100">
+                        <p className="text-xs text-gray-500">ID del usuario</p>
+                        <p className="text-sm font-medium break-all text-gray-700">{user._id}</p>
+                    </div>
 
-                    {/* USER INFO */}
-                    <div className="flex items-center gap-4">
-                        <img
-                            src={avatarSrc}
-                            alt={user.username}
-                            className="w-16 h-16 rounded-full object-cover border"
-                        />
+                    {/* CAMPOS EDITABLES */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <p className="font-bold text-gray-900 text-lg">
-                                {[user.name, user.surname].filter(Boolean).join(" ")}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                                @{user.username}
-                            </p>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                Nombre <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                className={inputClass}
+                                {...register("name", { required: "El nombre es obligatorio" })}
+                            />
+                            {errors.name && (
+                                <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+                            )}
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                Apellido <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                className={inputClass}
+                                {...register("surname", { required: "El apellido es obligatorio" })}
+                            />
+                            {errors.surname && (
+                                <p className="text-red-500 text-xs mt-1">{errors.surname.message}</p>
+                            )}
                         </div>
                     </div>
 
-                    {/* DATA */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div className="bg-gray-50 rounded-lg p-3">
-                            <p className="text-xs text-gray-500">ID</p>
-                            <p className="text-sm font-medium break-all">
-                                {user.id}
-                            </p>
-                        </div>
-
-                        <div className="bg-gray-50 rounded-lg p-3">
-                            <p className="text-xs text-gray-500">Email</p>
-                            <p className="text-sm font-medium">
-                                {user.email}
-                            </p>
-                        </div>
-
-                        <div className="bg-gray-50 rounded-lg p-3">
-                            <p className="text-xs text-gray-500">Nombre</p>
-                            <p className="text-sm font-medium">
-                                {user.name || "-"}
-                            </p>
-                        </div>
-
-                        <div className="bg-gray-50 rounded-lg p-3">
-                            <p className="text-xs text-gray-500">Apellido</p>
-                            <p className="text-sm font-medium">
-                                {user.surname || "-"}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* ROLE */}
                     <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">
-                            Rol
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                            Correo electrónico <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            className={inputClass}
+                            {...register("email", {
+                                required: "El correo es obligatorio",
+                                pattern: {
+                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                    message: "Formato de correo inválido",
+                                },
+                            })}
+                        />
+                        {errors.email && (
+                            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                        )}
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                            Rol <span className="text-red-500">*</span>
                         </label>
                         <select
-                            className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 focus:outline-none transition"
+                            className={inputClass}
+                            {...register("role", { required: "El rol es obligatorio" })}
                         >
-                            <option>USER_ROLE</option>
-                            <option>ADMIN_ROLE</option>
+                            <option value="Client">Client</option>
+                            <option value="Admin">Admin</option>
                         </select>
+                        {errors.role && (
+                            <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
+                        )}
                     </div>
-                </div>
 
-                {/* ACTIONS */}
-                <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 p-4 border-t">
-                    <button
-                        type="button"
-                        className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                    >
-                        Cerrar
-                    </button>
+                    {/* ACTIONS */}
+                    <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-3 pt-4 border-t">
+                        <button
+                            type="button"
+                            onClick={handleDeactivate}
+                            disabled={loading}
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg border border-red-300 text-red-600 hover:bg-red-50 transition text-sm font-medium disabled:opacity-50"
+                        >
+                            Inactivar usuario
+                        </button>
 
-                    <button
-                        type="button"
-                        className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow"
-                        style={{
-                            background:
-                                "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
-                        }}
-                    >
-                        Guardar cambios
-                    </button>
-                </div>
+                        <div className="flex flex-col-reverse sm:flex-row gap-3">
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                disabled={loading}
+                                className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition disabled:opacity-50"
+                            >
+                                Cancelar
+                            </button>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-60"
+                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                            >
+                                {loading ? "Guardando..." : "Guardar cambios"}
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     );
