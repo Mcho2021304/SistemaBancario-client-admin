@@ -4,7 +4,7 @@ import {
     createUser as createUserRequest,
     updateUser as updateUserRequest,
     deleteUser as deactivateUserRequest,
-} from "../../../shared/api";
+} from "../../../shared/api/admin";
 
 export const useUsersStore = create((set, get) => ({
     users: [],
