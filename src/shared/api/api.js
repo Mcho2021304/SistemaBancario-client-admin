@@ -20,14 +20,23 @@ const axiosAdmin = axios.create({
 });
 
 // Configuración de interceptores
-axiosAuth.interceptors.request.use( (config)=>{
+axiosAuth.interceptors.request.use((config) => {
     config._axiosClient = "auth";
     const token = useAuthStore.getState().token;
-    if(token){
-        config.headers.Authorization = `Bearer ${token}`; // CORRECTO (con espacio)
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-} );
+});
+
+axiosAdmin.interceptors.request.use((config) => {
+    config._axiosClient = "admin";
+    const token = useAuthStore.getState().token;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
 
 
 // configuración de documentación axios
