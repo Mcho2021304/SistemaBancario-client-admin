@@ -1,9 +1,96 @@
-export const FieldModal = () => {
+import { useState, useEffect } from "react";
+import { useDepositsStore } from "../store/depositsStore";
+import { showSuccess, showError } from "../../../shared/utils/toast";
+
+export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
+    const { createDeposit, loading } = useDepositsStore();
+
+    const [formData, setFormData] = useState({
+        accountNumber: "",
+        amount: "",
+        method: "Efectivo",
+        description: "Depósito administrativo",
+        status: "Completado",
+    });
+
+    const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        if (deposit) {
+            setFormData({
+                accountNumber: deposit.accountNumber || "",
+                amount: deposit.amount || "",
+                method: deposit.method || "Efectivo",
+                description: deposit.description || "Depósito administrativo",
+                status: deposit.status || "Completado",
+            });
+        } else {
+            setFormData({
+                accountNumber: "",
+                amount: "",
+                method: "Efectivo",
+                description: "Depósito administrativo",
+                status: "Completado",
+            });
+        }
+        setErrors({});
+    }, [deposit, isOpen]);
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.accountNumber.trim()) {
+            newErrors.accountNumber = "El número de cuenta es obligatorio";
+        }
+
+        if (!formData.amount || formData.amount <= 0) {
+            newErrors.amount = "El monto debe ser mayor a 0";
+        }
+
+        if (!formData.method) {
+            newErrors.method = "El método es obligatorio";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "amount" ? parseFloat(value) || "" : value,
+        }));
+        if (errors[name]) {
+            setErrors((prev) => ({
+                ...prev,
+                [name]: "",
+            }));
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        try {
+            await createDeposit(formData);
+            showSuccess(`Depósito ${deposit ? "actualizado" : "creado"} correctamente`);
+            onClose();
+        } catch (error) {
+            showError(error.response?.data?.message || "Error al guardar el depósito");
+        }
+    };
+
+    if (!isOpen) return null;
+
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
             {/* CONTENEDOR */}
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
-
                 {/* HEADER */}
                 <div
                     className="p-4 sm:p-5 text-white sticky top-0 z-10"
@@ -13,83 +100,104 @@ export const FieldModal = () => {
                     }}
                 >
                     <h2 className="text-xl sm:text-2xl font-bold">
-                        Nuevo Campo
+                        {deposit ? "Editar Depósito" : "Nuevo Depósito"}
                     </h2>
                     <p className="text-xs sm:text-sm opacity-80">
-                        Completa la información del Deposito
+                        Completa la información del depósito
                     </p>
                 </div>
 
                 {/* FORM */}
-                <div className="p-4 sm:p-6 space-y-5 overflow-y-auto">
-
-                    {/* PREVIEW */}
-                    <div className="flex justify-center">
-                        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl bg-gray-100 border flex items-center justify-center overflow-hidden shadow-inner">
-                            <span className="text-gray-400 text-xs sm:text-sm">
-                                Sin imagen
-                            </span>
-                        </div>
-                    </div>
-
-                    {/* INPUTS */}
+                <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-5 overflow-y-auto flex-1">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                        {/* Nombre */}
+                        {/* Número de Cuenta */}
                         <div className="flex flex-col md:col-span-2">
                             <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Nombre del 
+                                Número de Cuenta *
                             </label>
                             <input
-                                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
-                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-                                placeholder="Ej. Cancha Central"
+                                type="text"
+                                name="accountNumber"
+                                value={formData.accountNumber}
+                                onChange={handleChange}
+                                disabled={!!deposit}
+                                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm 
+                                focus:outline-none focus:ring-2 transition ${
+                                    errors.accountNumber
+                                        ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                                } ${deposit ? "opacity-50 cursor-not-allowed" : ""}`}
+                                placeholder="Ej. 000-4562-1"
                             />
+                            {errors.accountNumber && (
+                                <p className="text-red-500 text-xs mt-1">{errors.accountNumber}</p>
+                            )}
                         </div>
 
-                        {/* Tipo */}
+                        {/* Monto */}
                         <div className="flex flex-col">
                             <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Tipo de cancha
-                            </label>
-                            <select
-                                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
-                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-                            >
-                                <option>Seleccione un tipo</option>
-                                <option>Sintética</option>
-                                <option>Concreto</option>
-                                <option>Natural</option>
-                            </select>
-                        </div>
-
-                        {/* Capacidad */}
-                        <div className="flex flex-col">
-                            <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Capacidad
-                            </label>
-                            <select
-                                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
-                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-                            >
-                                <option>Seleccione capacidad</option>
-                                <option>Fútbol 5</option>
-                                <option>Fútbol 7</option>
-                                <option>Fútbol 11</option>
-                            </select>
-                        </div>
-
-                        {/* Precio */}
-                        <div className="flex flex-col">
-                            <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Precio por hora
+                                Monto (Q) *
                             </label>
                             <input
                                 type="number"
-                                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
-                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-                                placeholder="Q100"
+                                name="amount"
+                                value={formData.amount}
+                                onChange={handleChange}
+                                step="0.01"
+                                min="0.01"
+                                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm 
+                                focus:outline-none focus:ring-2 transition ${
+                                    errors.amount
+                                        ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                                }`}
+                                placeholder="1,250.00"
                             />
+                            {errors.amount && (
+                                <p className="text-red-500 text-xs mt-1">{errors.amount}</p>
+                            )}
+                        </div>
+
+                        {/* Método */}
+                        <div className="flex flex-col">
+                            <label className="text-sm font-semibold text-gray-700 mb-1">
+                                Método *
+                            </label>
+                            <select
+                                name="method"
+                                value={formData.method}
+                                onChange={handleChange}
+                                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm 
+                                focus:outline-none focus:ring-2 transition ${
+                                    errors.method
+                                        ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                                        : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                                }`}
+                            >
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                            {errors.method && (
+                                <p className="text-red-500 text-xs mt-1">{errors.method}</p>
+                            )}
+                        </div>
+
+                        {/* Estado */}
+                        <div className="flex flex-col">
+                            <label className="text-sm font-semibold text-gray-700 mb-1">
+                                Estado
+                            </label>
+                            <select
+                                name="status"
+                                value={formData.status}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
+                                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                            >
+                                <option value="Completado">Completado</option>
+                                <option value="Anulado">Anulado</option>
+                            </select>
                         </div>
 
                         {/* Descripción */}
@@ -98,22 +206,13 @@ export const FieldModal = () => {
                                 Descripción
                             </label>
                             <textarea
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                rows="3"
                                 className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm 
-                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
-                                placeholder="Detalles del campo..."
-                            />
-                        </div>
-
-                        {/* Imagen */}
-                        <div className="flex flex-col md:col-span-2">
-                            <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Imagen del campo
-                            </label>
-                            <input
-                                type="file"
-                                className="w-full px-3 py-2 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 
-                hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 transition cursor-pointer"
-                                accept="image/*"
+                                focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                                placeholder="Detalles del depósito..."
                             />
                         </div>
                     </div>
@@ -121,23 +220,28 @@ export const FieldModal = () => {
                     {/* BOTONES */}
                     <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 border-t">
                         <button
-                            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                            type="button"
+                            onClick={onClose}
+                            disabled={loading}
+                            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition disabled:opacity-50"
                         >
                             Cancelar
                         </button>
 
                         <button
-                            className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow"
+                            type="submit"
+                            disabled={loading}
+                            className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-50"
                             style={{
                                 background:
                                     "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
                                 border: "none",
                             }}
                         >
-                            Crear campo
+                            {loading ? "Guardando..." : deposit ? "Actualizar" : "Crear"}
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
