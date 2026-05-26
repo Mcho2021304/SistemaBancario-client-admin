@@ -20,20 +20,36 @@ export const useAuthStore = create(
             isAuthenticated: false,
 
             checkAuth: ()=> {
-                const token = get().token;
-                const role = get().user?.role;
-                const isAdmin = role === "DAMIN_ROLE";
+                try {
+                    const token = get().token;
+                    const user = get().user;
+                    const role = user?.role;
+                    const isAdmin = role === "ADMIN_ROLE" || role === "ADMIN" || role === "Administrador";
 
-                if(token && !isAdmin){
+                    if(token && user && isAdmin){
+                        set({
+                            isAuthenticated: true,
+                            isLoadingAuth: false,
+                        });
+                    } else if(token && !isAdmin){
+                        set({
+                            user: null,
+                            token: null,
+                            refreshToken: null,
+                            expiresAt: null,
+                            isAuthenticated: false,
+                            isLoadingAuth: false,
+                            error: "No tienes permiso para acceder como administrador"
+                        });
+                    } else {
+                        set({
+                            isLoadingAuth: false,
+                        });
+                    }
+                } catch (error) {
                     set({
-                        user:null,
-                        token: null,
-                        refreshToken: null,
-                        expiresAt: null,
-                        isAuthenticated:false,
-                        isLoadingAuth:false,
-                        erro: "No tienes permiso para acceder como administrador"
-                    })
+                        isLoadingAuth: false,
+                    });
                 }
             },
             
