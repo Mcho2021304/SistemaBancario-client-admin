@@ -103,7 +103,8 @@ export const Shoppings = () => {
             <thead className="bg-gray-50 text-gray-700">
               <tr>
                 <th className="text-left px-4 py-3">Usuario</th>
-                <th className="text-left px-4 py-3">Cuenta</th>
+                <th className="text-left px-4 py-3">Cuenta Origen</th>
+                <th className="text-left px-4 py-3">Cuenta Destino</th>
                 <th className="text-right px-4 py-3">Monto</th>
                 <th className="text-left px-4 py-3">Estado</th>
                 <th className="text-left px-4 py-3">Fecha</th>
@@ -113,13 +114,13 @@ export const Shoppings = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td className="px-4 py-6 text-center text-gray-400" colSpan={6}>
+                  <td className="px-4 py-6 text-center text-gray-400" colSpan={7}>
                     Cargando compras...
                   </td>
                 </tr>
               ) : paginated.length === 0 ? (
                 <tr>
-                  <td className="px-4 py-6 text-center text-gray-500" colSpan={6}>
+                  <td className="px-4 py-6 text-center text-gray-500" colSpan={7}>
                     No hay compras para mostrar.
                   </td>
                 </tr>
@@ -128,6 +129,7 @@ export const Shoppings = () => {
                   <tr key={shopping._id || shopping.id || `shopping-${index}`} className="border-t hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3 font-medium text-gray-800">{shopping.userId}</td>
                     <td className="px-4 py-3 text-gray-600">{shopping.accountNumber}</td>
+                    <td className="px-4 py-3 text-gray-600">{shopping.receptorAccount || "-"}</td>
                     <td className="px-4 py-3 text-right font-semibold text-green-600">{formatCurrency(shopping.amount)}</td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-semibold ${shopping.status === "Completado" ? "bg-green-100 text-green-700" : shopping.status === "Anulado" ? "bg-red-100 text-red-700" : "bg-yellow-100 text-yellow-700"}`}>

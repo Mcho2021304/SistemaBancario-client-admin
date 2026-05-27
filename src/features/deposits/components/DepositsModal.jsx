@@ -6,6 +6,7 @@ export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
     const { createDeposit, loading } = useDepositsStore();
 
     const [formData, setFormData] = useState({
+        senderAccount: "",
         accountNumber: "",
         amount: "",
         method: "Efectivo",
@@ -18,6 +19,7 @@ export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
     useEffect(() => {
         if (deposit) {
             setFormData({
+                senderAccount: deposit.senderAccount || "",
                 accountNumber: deposit.accountNumber || "",
                 amount: deposit.amount || "",
                 method: deposit.method || "Efectivo",
@@ -26,6 +28,7 @@ export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
             });
         } else {
             setFormData({
+                senderAccount: "",
                 accountNumber: "",
                 amount: "",
                 method: "Efectivo",
@@ -39,8 +42,12 @@ export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
     const validateForm = () => {
         const newErrors = {};
 
+        if (!formData.senderAccount.trim()) {
+            newErrors.senderAccount = "La cuenta de origen es obligatoria";
+        }
+
         if (!formData.accountNumber.trim()) {
-            newErrors.accountNumber = "El número de cuenta es obligatorio";
+            newErrors.accountNumber = "La cuenta destino es obligatoria";
         }
 
         if (!formData.amount || formData.amount <= 0) {
@@ -110,10 +117,34 @@ export const DepositsModal = ({ isOpen, onClose, deposit = null }) => {
                 {/* FORM */}
                 <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-5 overflow-y-auto flex-1">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Número de Cuenta */}
-                        <div className="flex flex-col md:col-span-2">
+                        {/* Cuenta Origen */}
+                        <div className="flex flex-col md:col-span-1">
                             <label className="text-sm font-semibold text-gray-700 mb-1">
-                                Número de Cuenta *
+                                Cuenta Origen *
+                            </label>
+                            <input
+                                type="text"
+                                name="senderAccount"
+                                value={formData.senderAccount}
+                                onChange={handleChange}
+                                disabled={!!deposit}
+                                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm 
+                                focus:outline-none focus:ring-2 transition ${
+                                    errors.senderAccount
+                                        ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                                        : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
+                                } ${deposit ? "opacity-50 cursor-not-allowed" : ""}`}
+                                placeholder="Ej. 000-1234-5"
+                            />
+                            {errors.senderAccount && (
+                                <p className="text-red-500 text-xs mt-1">{errors.senderAccount}</p>
+                            )}
+                        </div>
+
+                        {/* Cuenta Destino */}
+                        <div className="flex flex-col md:col-span-1">
+                            <label className="text-sm font-semibold text-gray-700 mb-1">
+                                Cuenta Destino *
                             </label>
                             <input
                                 type="text"

@@ -128,7 +128,8 @@ export const Deposits = () => {
                     <table className="min-w-full text-sm">
                         <thead className="bg-gray-50 text-gray-700">
                             <tr>
-                                <th className="text-left px-4 py-3">Cuenta</th>
+                                <th className="text-left px-4 py-3">Cuenta Origen</th>
+                                <th className="text-left px-4 py-3">Cuenta Destino</th>
                                 <th className="text-right px-4 py-3">Monto</th>
                                 <th className="text-left px-4 py-3">Método</th>
                                 <th className="text-left px-4 py-3">Estado</th>
@@ -140,19 +141,22 @@ export const Deposits = () => {
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td className="px-4 py-6 text-center text-gray-400" colSpan={6}>
+                                    <td className="px-4 py-6 text-center text-gray-400" colSpan={7}>
                                         Cargando depósitos...
                                     </td>
                                 </tr>
                             ) : paginated.length === 0 ? (
                                 <tr>
-                                    <td className="px-4 py-6 text-center text-gray-500" colSpan={6}>
+                                    <td className="px-4 py-6 text-center text-gray-500" colSpan={7}>
                                         No hay depósitos para mostrar.
                                     </td>
                                 </tr>
                             ) : (
                                 paginated.map((d, index) => (
                                     <tr key={d._id || d.id || `deposit-${index}`} className="border-t hover:bg-gray-50 transition-colors">
+                                        <td className="px-4 py-3 font-medium text-gray-800">
+                                            {d.senderAccount || "-"}
+                                        </td>
                                         <td className="px-4 py-3 font-medium text-gray-800">
                                             {d.accountNumber}
                                         </td>

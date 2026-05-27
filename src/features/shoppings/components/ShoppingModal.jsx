@@ -7,6 +7,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
   const [formData, setFormData] = useState({
     userId: "",
     accountNumber: "",
+    receptorAccount: "",
     amount: "",
     description: "",
     status: "Completado",
@@ -18,6 +19,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
       setFormData({
         userId: shopping.userId || "",
         accountNumber: shopping.accountNumber || "",
+        receptorAccount: shopping.receptorAccount || "",
         amount: shopping.amount ?? "",
         description: shopping.description || "",
         status: shopping.status || "Completado",
@@ -26,6 +28,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
       setFormData({
         userId: "",
         accountNumber: "",
+        receptorAccount: "",
         amount: "",
         description: "",
         status: "Completado",
@@ -37,7 +40,8 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.userId.trim()) newErrors.userId = "El ID de usuario es obligatorio";
-    if (!formData.accountNumber.trim()) newErrors.accountNumber = "El número de cuenta es obligatorio";
+    if (!formData.accountNumber.trim()) newErrors.accountNumber = "La cuenta de origen es obligatoria";
+    if (!formData.receptorAccount.trim()) newErrors.receptorAccount = "La cuenta destino es obligatoria";
     if (formData.amount === "" || Number(formData.amount) <= 0) newErrors.amount = "El monto debe ser mayor a 0";
     if (!formData.description.trim()) newErrors.description = "La descripción es obligatoria";
     setErrors(newErrors);
@@ -60,6 +64,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
       await createShopping({
         userId: formData.userId,
         accountNumber: formData.accountNumber,
+        receptorAccount: formData.receptorAccount,
         amount: Number(formData.amount),
         description: formData.description,
         status: formData.status,
@@ -89,8 +94,12 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                 <p className="mt-1 text-gray-800 font-semibold">{shopping.userId || "-"}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-400 uppercase tracking-[0.2em]">Cuenta</p>
+                <p className="text-xs text-gray-400 uppercase tracking-[0.2em]">Cuenta Origen</p>
                 <p className="mt-1 text-gray-800 font-semibold">{shopping.accountNumber || "-"}</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 uppercase tracking-[0.2em]">Cuenta Destino</p>
+                <p className="mt-1 text-gray-800 font-semibold">{shopping.receptorAccount || "-"}</p>
               </div>
               <div>
                 <p className="text-xs text-gray-400 uppercase tracking-[0.2em]">Monto</p>
@@ -124,7 +133,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
               </div>
 
               <div className="flex flex-col">
-                <label className="text-sm font-semibold text-gray-700 mb-1">Número de cuenta *</label>
+                <label className="text-sm font-semibold text-gray-700 mb-1">Cuenta Origen *</label>
                 <input
                   name="accountNumber"
                   value={formData.accountNumber}
@@ -133,6 +142,18 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   placeholder="Ej. 000-4562-1"
                 />
                 {errors.accountNumber && <p className="text-red-500 text-xs mt-1">{errors.accountNumber}</p>}
+              </div>
+
+              <div className="flex flex-col">
+                <label className="text-sm font-semibold text-gray-700 mb-1">Cuenta Destino *</label>
+                <input
+                  name="receptorAccount"
+                  value={formData.receptorAccount}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.receptorAccount ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
+                  placeholder="Ej. 000-4562-2"
+                />
+                {errors.receptorAccount && <p className="text-red-500 text-xs mt-1">{errors.receptorAccount}</p>}
               </div>
 
               <div className="flex flex-col">
