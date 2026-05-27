@@ -71,7 +71,7 @@ export const Settings = () => {
                                     <td className="px-6 py-4">
                                         <span
                                             className={`px-3 py-1 text-xs rounded-full font-semibold ${user.role === "ADMIN_ROLE"
-                                                    ? "bg-blue-100 text-blue-700"
+                                                    ? "bg-red-50 text-red-700"
                                                     : "bg-gray-100 text-gray-700"
                                                 }`}
                                         >
@@ -84,7 +84,7 @@ export const Settings = () => {
                                         <button
                                             className={`px-4 py-2 rounded-lg text-xs font-semibold text-white ${user.isCurrentUser
                                                     ? "bg-gray-400 cursor-not-allowed"
-                                                    : "bg-blue-600 hover:bg-blue-700"
+                                                    : "bg-[#631616] hover:bg-[#470f0f]"
                                                 }`}
                                         >
                                             {user.isCurrentUser
@@ -121,7 +121,7 @@ export const Settings = () => {
                             <div className="flex justify-between items-center">
                                 <span
                                     className={`px-3 py-1 text-xs rounded-full font-semibold ${user.role === "ADMIN_ROLE"
-                                            ? "bg-blue-100 text-blue-700"
+                                            ? "bg-red-50 text-red-700"
                                             : "bg-gray-100 text-gray-700"
                                         }`}
                                 >
@@ -131,7 +131,7 @@ export const Settings = () => {
                                 <button
                                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold text-white ${user.isCurrentUser
                                             ? "bg-gray-400"
-                                            : "bg-blue-600"
+                                            : "bg-[#631616]"
                                         }`}
                                 >
                                     {user.role === "ADMIN_ROLE" ? "User" : "Admin"}

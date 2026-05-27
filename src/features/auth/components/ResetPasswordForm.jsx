@@ -14,7 +14,7 @@ export const ResetPasswordForm = () => {
                     id="password"
                     type="password"
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#631616] focus:ring-2 focus:ring-[#631616]/20"
                 />
 
                 <p className="text-red-600 text-xs mt-1">
@@ -35,7 +35,7 @@ export const ResetPasswordForm = () => {
                     id="confirmPassword"
                     type="password"
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-[#631616] focus:ring-2 focus:ring-[#631616]/20"
                 />
 
                 <p className="text-red-600 text-xs mt-1">

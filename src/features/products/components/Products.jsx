@@ -69,7 +69,7 @@ export const Products = () => {
           value={search}
           onChange={handleSearchChange}
           placeholder="Buscar por nombre, tipo o descripción..."
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
         />
       </div>
 
@@ -122,7 +122,7 @@ export const Products = () => {
                     <td className="px-4 py-3 text-right flex gap-2 justify-end">
                       <button
                         onClick={() => handleOpenModal(product)}
-                        className="px-3 py-1.5 rounded-lg bg-blue-500 text-white text-xs font-semibold hover:bg-blue-600 transition"
+                        className="px-3 py-1.5 rounded-lg bg-[#631616] text-white text-xs font-semibold hover:bg-[#470f0f] transition"
                       >
                         Editar
                       </button>

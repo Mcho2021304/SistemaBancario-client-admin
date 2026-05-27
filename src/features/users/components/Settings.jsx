@@ -51,14 +51,14 @@ export const Settings = ({ users = [] }) => {
 
                                     {/* Rol */}
                                     <td className="px-6 py-4">
-                                        <span className="px-3 py-1 text-xs rounded-full font-semibold bg-blue-100 text-blue-700">
+                                        <span className="px-3 py-1 text-xs rounded-full font-semibold bg-red-50 text-red-700">
                                             {user.role}
                                         </span>
                                     </td>
 
                                     {/* Acción */}
                                     <td className="px-6 py-4 text-right">
-                                        <button className="px-4 py-2 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition">
+                                        <button className="px-4 py-2 rounded-lg text-xs font-semibold text-white bg-[#631616] hover:bg-[#470f0f] transition">
                                             Cambiar Rol
                                         </button>
                                     </td>
@@ -90,11 +90,11 @@ export const Settings = ({ users = [] }) => {
                             </div>
 
                             <div className="flex justify-between items-center">
-                                <span className="px-3 py-1 text-xs rounded-full font-semibold bg-blue-100 text-blue-700">
+                                <span className="px-3 py-1 text-xs rounded-full font-semibold bg-red-50 text-red-700">
                                     {user.role}
                                 </span>
 
-                                <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600">
+                                <button className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#631616]">
                                     Cambiar
                                 </button>
                             </div>

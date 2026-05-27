@@ -76,7 +76,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
-        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}>
+        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}>
           <h2 className="text-xl sm:text-2xl font-bold">{shopping ? "Detalle de Compra" : "Nueva Compra"}</h2>
           <p className="text-xs sm:text-sm opacity-80">{shopping ? "Revisa la información de la compra." : "Completa la información de la compra."}</p>
         </div>
@@ -117,7 +117,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   name="userId"
                   value={formData.userId}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.userId ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.userId ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                   placeholder="Ej. 6424f3d0a1b2c3d4"
                 />
                 {errors.userId && <p className="text-red-500 text-xs mt-1">{errors.userId}</p>}
@@ -129,7 +129,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   name="accountNumber"
                   value={formData.accountNumber}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.accountNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.accountNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                   placeholder="Ej. 000-4562-1"
                 />
                 {errors.accountNumber && <p className="text-red-500 text-xs mt-1">{errors.accountNumber}</p>}
@@ -144,7 +144,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   onChange={handleChange}
                   min="0.01"
                   step="0.01"
-                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.amount ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.amount ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                   placeholder="100.00"
                 />
                 {errors.amount && <p className="text-red-500 text-xs mt-1">{errors.amount}</p>}
@@ -156,7 +156,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-[#631616] focus:ring-2 focus:ring-[#631616]/20 transition"
                 >
                   <option value="Completado">Completado</option>
                   <option value="Anulado">Anulado</option>
@@ -171,7 +171,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   value={formData.description}
                   onChange={handleChange}
                   rows="3"
-                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.description ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                  className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.description ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                   placeholder="Ej. Compra de insumos para cliente"
                 />
                 {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
@@ -190,7 +190,7 @@ export const ShoppingModal = ({ isOpen, onClose, shopping = null }) => {
                   type="submit"
                   disabled={loading}
                   className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-50"
-                  style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)", border: "none" }}
+                  style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)", border: "none" }}
                 >
                   {loading ? "Guardando..." : "Crear compra"}
                 </button>

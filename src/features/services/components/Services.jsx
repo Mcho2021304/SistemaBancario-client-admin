@@ -43,7 +43,7 @@ export const Services = () => {
                 </h2>
 
                 <div className="flex gap-2 mt-2">
-                    <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
+                    <span className="px-3 py-1 text-xs rounded-full bg-red-50 text-red-700 font-medium">
                         Tasa: 15%
                     </span>
 
@@ -84,7 +84,7 @@ export const Services = () => {
                 </h2>
 
                 <div className="flex gap-2 mt-2">
-                    <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
+                    <span className="px-3 py-1 text-xs rounded-full bg-red-50 text-red-700 font-medium">
                         Tasa: 4% anual
                     </span>
 

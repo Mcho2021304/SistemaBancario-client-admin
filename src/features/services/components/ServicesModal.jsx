@@ -9,7 +9,7 @@ export const ServicesModal = () => {
                     className="p-4 sm:p-5 text-white sticky top-0 z-10"
                     style={{
                         background:
-                            "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
+                            "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)",
                     }}
                 >
                     <h2 className="text-xl sm:text-2xl font-bold">
@@ -109,7 +109,7 @@ export const ServicesModal = () => {
                             className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow"
                             style={{
                                 background:
-                                    "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
+                                    "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)",
                                 border: "none",
                             }}
                         >

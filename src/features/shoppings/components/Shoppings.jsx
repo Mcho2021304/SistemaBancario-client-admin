@@ -75,12 +75,12 @@ export const Shoppings = () => {
             value={search}
             onChange={handleSearchChange}
             placeholder="Buscar por usuario, cuenta o descripción..."
-            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           />
           <select
             value={statusFilter}
             onChange={handleStatusChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           >
             {STATUS_OPTIONS.map((status) => (
               <option key={status} value={status}>
@@ -139,7 +139,7 @@ export const Shoppings = () => {
                       <button
                         onClick={() => setSelectedShopping(shopping)}
                         className="px-3 py-1.5 rounded-lg text-white text-xs font-semibold hover:opacity-90 transition mr-2"
-                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                       >
                         Ver
                       </button>

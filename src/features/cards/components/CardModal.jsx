@@ -47,7 +47,7 @@ export const CardModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden">
-        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}>
+        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}>
           <h2 className="text-xl sm:text-2xl font-bold">Nueva Tarjeta</h2>
           <p className="text-xs sm:text-sm opacity-80">Emite una tarjeta vinculada a una cuenta existente.</p>
         </div>
@@ -60,7 +60,7 @@ export const CardModal = ({ isOpen, onClose }) => {
                 name="cardNumber"
                 value={formData.cardNumber}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.cardNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.cardNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                 placeholder="0000 0000 0000 0000"
               />
               {errors.cardNumber && <p className="text-red-500 text-xs mt-1">{errors.cardNumber}</p>}
@@ -72,7 +72,7 @@ export const CardModal = ({ isOpen, onClose }) => {
                 name="cvv"
                 value={formData.cvv}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.cvv ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.cvv ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                 placeholder="123"
                 maxLength={4}
               />
@@ -85,7 +85,7 @@ export const CardModal = ({ isOpen, onClose }) => {
                 name="expirationDate"
                 value={formData.expirationDate}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.expirationDate ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.expirationDate ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                 placeholder="MM/AA"
               />
               {errors.expirationDate && <p className="text-red-500 text-xs mt-1">{errors.expirationDate}</p>}
@@ -97,7 +97,7 @@ export const CardModal = ({ isOpen, onClose }) => {
                 name="accountNumber"
                 value={formData.accountNumber}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.accountNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"}`}
+                className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${errors.accountNumber ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"}`}
                 placeholder="000-4562-1"
               />
               {errors.accountNumber && <p className="text-red-500 text-xs mt-1">{errors.accountNumber}</p>}
@@ -109,7 +109,7 @@ export const CardModal = ({ isOpen, onClose }) => {
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-[#631616] focus:ring-2 focus:ring-[#631616]/20 transition"
               >
                 <option value="Activa">Activa</option>
                 <option value="Inactiva">Inactiva</option>
@@ -131,7 +131,7 @@ export const CardModal = ({ isOpen, onClose }) => {
               type="submit"
               disabled={loading}
               className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-50"
-              style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)", border: "none" }}
+              style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)", border: "none" }}
             >
               {loading ? "Guardando..." : "Crear tarjeta"}
             </button>

@@ -109,7 +109,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
         <div
           className="p-4 sm:p-5 text-white sticky top-0 z-10"
           style={{
-            background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
+            background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)",
           }}
         >
           <h2 className="text-xl sm:text-2xl font-bold">
@@ -132,7 +132,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
                   errors.accountNumber
                     ? "border-red-400 focus:border-red-500 focus:ring-red-200"
-                    : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                    : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 } ${account ? "opacity-50 cursor-not-allowed" : ""}`}
                 placeholder="Ej. 000-4562-1"
               />
@@ -148,7 +148,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
                   errors.userId
                     ? "border-red-400 focus:border-red-500 focus:ring-red-200"
-                    : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                    : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 }`}
                 placeholder="Ej. 6424f3d0a1b2c3d4"
               />
@@ -167,7 +167,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
                   errors.balance
                     ? "border-red-400 focus:border-red-500 focus:ring-red-200"
-                    : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                    : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 }`}
                 placeholder="0.00"
               />
@@ -183,7 +183,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
                   errors.accountType
                     ? "border-red-400 focus:border-red-500 focus:ring-red-200"
-                    : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                    : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 }`}
               >
                 <option value="Monetaria">Monetaria</option>
@@ -235,7 +235,7 @@ export const AccountModal = ({ isOpen, onClose, account = null }) => {
               disabled={loading}
               className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-50"
               style={{
-                background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)",
+                background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)",
                 border: "none",
               }}
             >

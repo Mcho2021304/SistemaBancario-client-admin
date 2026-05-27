@@ -76,12 +76,12 @@ export const Transactions = () => {
             value={search}
             onChange={handleSearchChange}
             placeholder="Buscar por cuenta, servicio o descripción..."
-            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           />
           <select
             value={typeFilter}
             onChange={handleTypeChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           >
             {TRANSACTION_TYPES.map((type) => (
               <option key={type} value={type}>
@@ -138,7 +138,7 @@ export const Transactions = () => {
                       <button
                         onClick={() => setSelectedTransaction(tx)}
                         className="px-3 py-1.5 rounded-lg text-white text-xs font-semibold hover:opacity-90 transition"
-                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                       >
                         Ver detalle
                       </button>

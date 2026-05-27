@@ -86,12 +86,12 @@ export const Accounts = () => {
             value={search}
             onChange={handleSearchChange}
             placeholder="Buscar por cuenta o usuario..."
-            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           />
           <select
             value={typeFilter}
             onChange={handleTypeChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           >
             {ACCOUNT_TYPES.map((type) => (
               <option key={type} value={type}>
@@ -102,7 +102,7 @@ export const Accounts = () => {
           <select
             value={statusFilter}
             onChange={handleStatusChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           >
             {ACCOUNT_STATUS.map((status) => (
               <option key={status} value={status}>
@@ -155,7 +155,7 @@ export const Accounts = () => {
                       {formatCurrency(account.balance)}
                     </td>
                     <td className="px-4 py-3">
-                      <span className="px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                      <span className="px-2 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700">
                         {account.accountType}
                       </span>
                     </td>
@@ -177,7 +177,7 @@ export const Accounts = () => {
                           setShowModal(true);
                         }}
                         className="px-3 py-1.5 rounded-lg text-white text-xs font-semibold hover:opacity-90 transition"
-                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                        style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                       >
                         Ver / Editar
                       </button>

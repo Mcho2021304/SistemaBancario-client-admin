@@ -4,7 +4,7 @@ import { useUsersStore } from "../store/usersStore";
 import { showSuccess, showError } from "../../../shared/utils/toast";
 
 const inputClass =
-    "w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition";
+    "w-full px-3 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 shadow-sm focus:outline-none focus:border-[#631616] focus:ring-2 focus:ring-[#631616]/20 transition";
 
 export const UserDetailModal = ({ isOpen, user, onClose }) => {
     const { updateUser, deactivateUser, loading } = useUsersStore();
@@ -61,7 +61,7 @@ export const UserDetailModal = ({ isOpen, user, onClose }) => {
                 {/* HEADER */}
                 <div
                     className="p-4 sm:p-5 text-white sticky top-0 z-10"
-                    style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                    style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                 >
                     <h2 className="text-xl sm:text-2xl font-bold">Editar Usuario</h2>
                     <p className="text-xs sm:text-sm opacity-80">
@@ -172,7 +172,7 @@ export const UserDetailModal = ({ isOpen, user, onClose }) => {
                                 type="submit"
                                 disabled={loading}
                                 className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-60"
-                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                             >
                                 {loading ? "Guardando..." : "Guardar cambios"}
                             </button>

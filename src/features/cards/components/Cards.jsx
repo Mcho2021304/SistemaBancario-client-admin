@@ -65,12 +65,12 @@ export const Cards = () => {
             value={search}
             onChange={handleSearchChange}
             placeholder="Buscar por número de tarjeta o cuenta..."
-            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           />
           <select
             value={statusFilter}
             onChange={handleStatusChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
           >
             {STATUSES.map((status) => (
               <option key={status} value={status}>

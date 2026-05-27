@@ -7,7 +7,7 @@ export const Sidebar = () => {
         { label: "Usuarios", to: "/dashboard/users" },
         { label: "Depositos", to: "/dashboard/deposits" },
         { label: "Cuentas", to: "/dashboard/accounts" },
-        { label: "Transactions", to: "/dashboard/transactions" },
+        { label: "Transacciones", to: "/dashboard/transactions" },
         { label: "Libreta", to: "/dashboard/passbooks" },
         { label: "Compras", to: "/dashboard/shoppings" },
         { label: "Productos", to: "/dashboard/products" },

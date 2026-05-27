@@ -34,7 +34,7 @@ export const Payments = () => {
 
                 {/* BADGES */}
                 <div className="flex gap-2 mt-3 flex-wrap">
-                    <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
+                    <span className="px-3 py-1 text-xs rounded-full bg-red-50 text-red-700 font-medium">
                         Q 1,500.00
                     </span>
 
@@ -68,7 +68,7 @@ export const Payments = () => {
                 </p>
 
                 <div className="flex gap-2 mt-3 flex-wrap">
-                    <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
+                    <span className="px-3 py-1 text-xs rounded-full bg-red-50 text-red-700 font-medium">
                         Q 450.00
                     </span>
 

@@ -82,7 +82,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden">
-        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}>
+        <div className="p-4 sm:p-5 text-white sticky top-0 z-10" style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}>
           <h2 className="text-xl sm:text-2xl font-bold">{editingProduct ? "Editar Producto" : "Nuevo Producto"}</h2>
           <p className="text-xs sm:text-sm opacity-80">
             {editingProduct ? "Actualiza los datos del producto." : "Crea un nuevo producto con sus características."}
@@ -97,7 +97,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
               value={formData.name}
               onChange={handleChange}
               className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
-                errors.name ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                errors.name ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
               }`}
               placeholder="Ej: Cuenta de Ahorros"
             />
@@ -112,7 +112,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
               onChange={handleChange}
               rows="3"
               className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
-                errors.description ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                errors.description ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
               }`}
               placeholder="Describe el producto..."
             />
@@ -127,7 +127,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
                 value={formData.type}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
-                  errors.type ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                  errors.type ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 }`}
                 placeholder="Ej: Ahorros"
               />
@@ -144,7 +144,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
                 value={formData.rate}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 rounded-lg border-2 bg-gray-50 shadow-sm focus:outline-none focus:ring-2 transition ${
-                  errors.rate ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-blue-500 focus:ring-blue-200"
+                  errors.rate ? "border-red-400 focus:border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-[#631616] focus:ring-[#631616]/20"
                 }`}
                 placeholder="3.5"
               />
@@ -176,7 +176,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }) => {
               type="submit"
               disabled={loading}
               className="w-full sm:w-auto px-5 py-2 rounded-lg text-white font-medium transition shadow disabled:opacity-50"
-              style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)", border: "none" }}
+              style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)", border: "none" }}
             >
               {loading ? "Guardando..." : editingProduct ? "Actualizar" : "Crear Producto"}
             </button>

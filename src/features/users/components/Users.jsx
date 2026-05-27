@@ -17,7 +17,6 @@ export const Users = () => {
 
     useEffect(() => {
         getUsers();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const filtered = users.filter((u) => {
@@ -46,7 +45,7 @@ export const Users = () => {
             {/* HEADER */}
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-main-blue">Usuarios</h1>
+                    <h1 className="text-3xl font-bold text-[#631616]">Usuarios</h1>
                     <p className="text-gray-500 text-sm">
                         Administra usuarios, consulta su información y cambia su rol
                     </p>
@@ -54,7 +53,7 @@ export const Users = () => {
 
                 <button
                     onClick={() => setShowCreate(true)}
-                    className="bg-main-blue px-5 py-2.5 rounded-lg text-white font-semibold hover:opacity-90 transition shadow-lg flex items-center gap-2"
+                    className="bg-[#631616] px-5 py-2.5 rounded-lg text-white font-semibold hover:opacity-90 transition shadow-lg flex items-center gap-2"
                 >
                     <span>+</span> Agregar Usuario
                 </button>
@@ -67,12 +66,12 @@ export const Users = () => {
                         value={search}
                         onChange={handleSearchChange}
                         placeholder="Buscar por nombre o correo..."
-                        className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]"
                     />
                     <select
                         value={roleFilter}
                         onChange={handleRoleChange}
-                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]"
                     >
                         {ROLES.map((r) => (
                             <option key={r} value={r}>{r === "Todos" ? "Todos los roles" : r}</option>
@@ -130,7 +129,7 @@ export const Users = () => {
                                                 className={`px-2 py-1 rounded-full text-xs font-semibold ${
                                                     u.role === "Admin"
                                                         ? "bg-main-blue text-white"
-                                                        : "bg-blue-100 text-blue-700"
+                                                        : "bg-red-50 text-red-700"
                                                 }`}
                                             >
                                                 {u.role}
@@ -141,7 +140,7 @@ export const Users = () => {
                                             <button
                                                 onClick={() => setSelectedUser(u)}
                                                 className="px-3 py-1.5 rounded-lg text-white text-xs font-semibold hover:opacity-90 transition"
-                                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                                             >
                                                 Ver / Editar
                                             </button>

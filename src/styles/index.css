@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-main-blue: #08316d;
+  --color-main-blue: #631616;
 }
 
 :root {
@@ -9,7 +9,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --main-blue: #08316d;
+  --main-blue: #631616;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,9 +46,9 @@
   height: 5px;
   border-radius: 6px;
   background: linear-gradient(90deg,
-      rgba(8, 49, 109, 0.18) 0%,
-      #08316d 50%,
-      rgba(8, 49, 109, 0.18) 100%);
+      rgba(99, 22, 22, 0.18) 0%,
+      #631616 50%,
+      rgba(99, 22, 22, 0.18) 100%);
   filter: blur(1.5px);
   z-index: 1;
 }

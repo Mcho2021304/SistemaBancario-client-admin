@@ -88,12 +88,12 @@ export const Deposits = () => {
                         value={search}
                         onChange={handleSearchChange}
                         placeholder="Buscar por número de cuenta..."
-                        className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="md:col-span-2 w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
                     />
                     <select
                         value={methodFilter}
                         onChange={handleMethodChange}
-                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
                     >
                         {METHODS.map((m) => (
                             <option key={m} value={m}>
@@ -104,7 +104,7 @@ export const Deposits = () => {
                     <select
                         value={statusFilter}
                         onChange={handleStatusChange}
-                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#631616]/20"
                     >
                         {STATUSES.map((s) => (
                             <option key={s} value={s}>
@@ -162,7 +162,7 @@ export const Deposits = () => {
                                         </td>
 
                                         <td className="px-4 py-3">
-                                            <span className="px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                                            <span className="px-2 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700">
                                                 {d.method}
                                             </span>
                                         </td>
@@ -187,7 +187,7 @@ export const Deposits = () => {
                                             <button
                                                 onClick={() => setSelectedDeposit(d)}
                                                 className="px-3 py-1.5 rounded-lg text-white text-xs font-semibold hover:opacity-90 transition"
-                                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #1956a3 100%)" }}
+                                                style={{ background: "linear-gradient(90deg, var(--main-blue) 0%, #470f0f 100%)" }}
                                             >
                                                 Ver / Editar
                                             </button>
