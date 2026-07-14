@@ -1,7 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
+import { useAuthStore } from "../../../features/auth/store/authStore.js";
  
 export const Sidebar = () => {
     const location = useLocation();
+    const { user } = useAuthStore();
+    
+    const isSuperAdmin = user?.role === "SUPERADMIN_ROLE" || user?.email === "admin@SistemaBancario.local";
  
     const items = [
         { label: "Usuarios", to: "/dashboard/users" },
@@ -15,6 +19,10 @@ export const Sidebar = () => {
         { label: "Tarjetas", to: "/dashboard/cards" }
     ];
  
+    if (isSuperAdmin) {
+        items.push({ label: "Configuración Global", to: "/dashboard/superadmin" });
+    }
+
     return (
         /* Fondo Pizarra Oscuro (#2C3E50) para un look técnico */
         <aside className="w-60 bg-[#2C3E50] min-h-[calc(100vh-4rem)] p-4 shadow-xl">
