@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export const LoginForm = ({ onForgot }) => {
+export const LoginForm = ({ onForgot, onRegister }) => {
     const navigate = useNavigate();
     const login = useAuthStore((state) => state.login);
     const loading = useAuthStore((state) => state.loading);
@@ -15,18 +15,22 @@ export const LoginForm = ({ onForgot }) => {
     } = useForm();
 
     const onSumnit = async (data) => {
-        const res = await login(data);
-        if (res) {
-            navigate("/dashboard");
-            toast.success("¡Bienvenido de nuevo!");
-        } else {
-            toast.error("Credenciales incorrectas");
+        try {
+            const res = await login(data);
+            if (res && res.success) {
+                navigate("/dashboard");
+                toast.success("¡Bienvenido de nuevo!");
+            } else {
+                toast.error(res?.error || "Usuario o contraseña incorrectos");
+            }
+        } catch (error) {
+            toast.error("Usuario o contraseña incorrectos");
         }
     };
 
 return (
     <form onSubmit={handleSubmit(onSumnit)} className="space-y-6">
-        {/* Sección de Email o Usuario */}
+        {/* SecciÃ³n de Email o Usuario */}
         <div className="space-y-2">
             <label className="block text-xs font-bold text-slate-500 uppercase tracking-[0.1em] ml-1">
                 Email o Usuario
@@ -45,14 +49,14 @@ return (
             )}
         </div>
 
-        {/* Sección de Contraseña */}
+        {/* SecciÃ³n de ContraseÃ±a */}
         <div className="space-y-2">
             <label className="block text-xs font-bold text-slate-500 uppercase tracking-[0.1em] ml-1">
                 Contraseña
             </label>
             <input
                 type="password"
-                placeholder="••••••••"
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 /* CAMBIO: Focus coherente con la paleta corinto */
                 className={`w-full px-4 py-3.5 bg-slate-100/50 border ${
                     errors.password ? 'border-red-300' : 'border-slate-200'
@@ -64,23 +68,29 @@ return (
             )}
         </div>
 
-        {/* Botón de Olvido de contraseña */}
-        <div className="flex justify-center">
-            <button
-                type="button"
-                onClick={onForgot}
-                /* CAMBIO: Color de texto a un vino sutil para mantener sobriedad */
-                className="text-sm font-bold text-[#630d0d] hover:text-[#4a0404] transition-colors"
-            >
-                ¿Olvidaste tu contraseña?
-            </button>
-        </div>
+            {/* Enlaces de acciones */}
+            <div className="flex justify-between items-center px-1">
+                <button
+                    type="button"
+                    onClick={onRegister}
+                    className="text-sm font-semibold text-[#631616] hover:text-[#4a0404] transition-colors"
+                >
+                    Solicitar acceso
+                </button>
+                <button
+                    type="button"
+                    onClick={onForgot}
+                    className="text-sm font-semibold text-[#631616] hover:text-[#4a0404] transition-colors"
+                >
+                    ¿Olvidaste tu contraseña?
+                </button>
+            </div>
 
-        {/* Botón de Iniciar Sesión */}
+        {/* BotÃ³n de Iniciar SesiÃ³n */}
         <button
             type="submit"
             disabled={loading}
-            /* CAMBIO: Gradiente de Vino a Corinto. Sombra ajustada a tonos cálidos/neutros */
+            /* CAMBIO: Gradiente de Vino a Corinto. Sombra ajustada a tonos cÃ¡lidos/neutros */
             className="w-full relative group overflow-hidden bg-gradient-to-r from-[#4a0404] to-[#720e0e] text-white font-black py-4 rounded-2xl shadow-xl shadow-red-900/10 hover:shadow-red-900/20 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
         >
             <span className="relative z-10 flex items-center justify-center gap-3 tracking-wide">
