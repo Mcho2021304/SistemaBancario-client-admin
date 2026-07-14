@@ -11,6 +11,8 @@ import { Products } from "../../features/products/components/Products.jsx";
 import { Services } from "../../features/services/components/Services.jsx";
 import { Passbooks } from "../../features/passbooks/components/Passbooks.jsx";
 import { ProtectedRoute } from "./ProtectedRoute.jsx";
+import { ProtectedSuperAdminRoute } from "./ProtectedSuperAdminRoute.jsx";
+import { SuperAdminPanel } from "../../features/superadmin/components/SuperAdminPanel.jsx";
 
 export const AppRoutes = () => {
   return (
@@ -36,6 +38,14 @@ export const AppRoutes = () => {
         <Route path="transactions" element={<Transactions />} />
         <Route path="shoppings" element={<Shoppings />} />
         <Route path="passbooks" element={<Passbooks />} />
+        <Route 
+          path="superadmin" 
+          element={
+            <ProtectedSuperAdminRoute>
+              <SuperAdminPanel />
+            </ProtectedSuperAdminRoute>
+          } 
+        />
       </Route>
 
       {/* Ruta temporal para pruebas */}
